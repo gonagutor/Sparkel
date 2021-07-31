@@ -19,7 +19,7 @@ class App extends React.Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
-            Hola natalia <code>src/App.js</code> and save to reload.
+            Hola Gonzalo <code>src/App.js</code> and save to reload.
           </p>
           <a
             className="App-link"
