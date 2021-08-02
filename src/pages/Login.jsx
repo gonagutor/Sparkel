@@ -41,8 +41,8 @@ class Login extends React.Component {
     };
 
     this.onLogin = () => {
-      const { username, password, rememberMe } = this.state;
-      console.log(`User: ${username}; Password: ${password}; Remember me: ${rememberMe}`);
+      /* const { username, password, rememberMe } = this.state;
+      console.log(`User: ${username}; Password: ${password}; Remember me: ${rememberMe}`); */
     };
   }
 
