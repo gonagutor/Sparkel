@@ -23,6 +23,9 @@
 #topDecoration {
   position: absolute;
   z-index: -10;
+  max-width: 700px;
+  min-width: 300px;
+  width: 100%;
 }
 
 /* --- Top row --- */
@@ -37,7 +40,8 @@
 #appTitle {
   margin: 0px;
   color: var(--main-color);
-  font-family: "Gilroy-Bold", sans-serif;
+  font-family: "Gilroy-Heavy", sans-serif;
+  font-weight: normal;
 }
 
 .switch {
@@ -111,13 +115,15 @@ input:checked + .slider:before {
   margin: 0px;
   font-size: 16px;
   font-family: "Gilroy-Bold", sans-serif;
+  font-weight: normal;
 }
 
 #welcomeText {
   margin: 0px;
   font-size: 16px;
-  line-height: 24px;
   font-family: "Gilroy-Regular", sans-serif;
+  font-weight: normal;
+  line-height: 24px;
 }
 
 /* --- Login Form --- */
@@ -183,6 +189,7 @@ form {
 #remembermeLabel {
   line-height: 24px;
   font-family: "Gilroy-Regular", sans-serif;
+  font-weight: normal;
   display: flex;
   flex-grow: 0;
   flex-direction: row;
@@ -192,6 +199,7 @@ form {
 #loginButton {
   line-height: 24px;
   font-family: "Gilroy-Bold", sans-serif;
+  font-weight: normal;
   font-size: 16px;
   color: var(--main-color);
   background-color: var(--primary-50);
@@ -221,6 +229,7 @@ form {
   margin-top: 0px;
   font-size: 16px;
   font-family: "Gilroy-Bold", sans-serif;
+  font-weight: normal;
 }
 
 #registerInfo {
@@ -228,6 +237,7 @@ form {
   font-size: 12px;
   line-height: 24px;
   font-family: "Gilroy-Regular", sans-serif;
+  font-weight: normal;
 }
 
 #registerButton {
@@ -240,6 +250,7 @@ form {
   text-align: center;
   font-size: 16px;
   font-family: "Gilroy-Bold", sans-serif;
+  font-weight: normal;
   background: var(--primary-50);
   color: var(--main-color);
 }
