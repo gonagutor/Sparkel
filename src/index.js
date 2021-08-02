@@ -7,6 +7,7 @@ import './styles/index.css';
 
 import App from './pages/App';
 import Login from './pages/Login';
+import Register from './pages/Register';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -17,6 +18,9 @@ ReactDOM.render(
         </Route>
         <Route exact path="/login">
           <Login />
+        </Route>
+        <Route exact path="/register">
+          <Register />
         </Route>
         <Route exact path="/home">
           <p>Hola</p>

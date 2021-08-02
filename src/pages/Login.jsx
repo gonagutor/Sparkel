@@ -1,4 +1,7 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+import ReactRouterPropTypes from 'react-router-prop-types';
+
 import '../styles/Login.css';
 import Theme from '../utils/theme';
 import BlobsLockIcon from '../res/Login/blobs-lock-icon.svg';
@@ -48,6 +51,7 @@ class Login extends React.Component {
 
   render() {
     const { username, password, rememberMe } = this.state;
+    const { history } = this.props;
     return (
       <div id="container">
         <img src={TopDecoration} id="topDecoration" height="130px" width="100vw" alt="" />
@@ -84,11 +88,15 @@ class Login extends React.Component {
             Necesitarás un codigo de invitación para poder registrarte. Si
             no tienes uno pideselo a alguien.
           </p>
-          <button id="registerButton" type="button">Registrarse</button>
+          <button id="registerButton" type="button" onClick={() => history.push('/register')}> Registrarse </button>
         </div>
       </div>
     );
   }
 }
 
-export default Login;
+Login.propTypes = {
+  history: ReactRouterPropTypes.history.isRequired,
+};
+
+export default withRouter(Login);

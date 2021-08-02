@@ -134,6 +134,7 @@ form {
 }
 
 .inputStyle {
+  display: block;
   line-height: 24px;
   font-family: "Gilroy-Regular", sans-serif;
   font-size: 16px;
@@ -150,6 +151,17 @@ form {
   background-color: var(--main-bg-color);
   border: 2px solid;
   box-shadow: var(--main-bg-color) 6px 6px 0px -2px, var(--main-color) 6px 6px;
+}
+
+.inputStyle.rowFirst {
+  min-width: 100px;
+  flex-grow: 1;
+  margin-right: 6px;
+}
+.inputStyle.rowSecond {
+  min-width: 100px;
+  flex-grow: 1;
+  margin-left: 6px;
 }
 
 #actionContainer {
