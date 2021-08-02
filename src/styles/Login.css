@@ -197,6 +197,7 @@ form {
 }
 
 #loginButton {
+  transition: box-shadow 0.5s ease;
   line-height: 24px;
   font-family: "Gilroy-Bold", sans-serif;
   font-weight: normal;
@@ -208,6 +209,14 @@ form {
   border-radius: 16px;
   border: 2px solid;
   box-shadow: var(--accent-60) 6px 6px 0px -2px, var(--main-color) 6px 6px;
+}
+
+#loginButton:hover {
+  box-shadow: var(--accent-60) 4px 4px 0px -2px, var(--main-color) 4px 4px;
+}
+
+#loginButton:focus {
+  box-shadow: var(--accent-60) 0px 0px 0px -2px, var(--main-color) 0px 0px;
 }
 
 /* --- Register Card --- */
@@ -253,4 +262,10 @@ form {
   font-weight: normal;
   background: var(--primary-50);
   color: var(--main-color);
+}
+
+#registerButton:hover,
+#registerButton:focus {
+  transition: background-color 0.5s ease;
+  background-color: var(--primary-70);
 }
