@@ -1,13 +1,31 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles/index.css';
-import App from './pages/App';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import reportWebVitals from './utils/reportWebVitals';
+import './styles/index.css';
+
+import App from './pages/App';
+import Login from './pages/Login';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <App />
+        </Route>
+        <Route exact path="/login">
+          <Login />
+        </Route>
+        <Route exact path="/home">
+          <p>Hola</p>
+        </Route>
+        <Route>
+          <h1>404 - Aquí no hay na</h1>
+        </Route>
+      </Switch>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root'),
 );

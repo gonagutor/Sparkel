@@ -1,0 +1,245 @@
+:root {
+  --main-color: #1b1b1b;
+  --main-bg-color: #ffffff;
+  --primary-50: #f9e450;
+  --primary-70: #ffbb38;
+  --accent-30: #c1bffa;
+  --accent-60: #5ac5ec;
+  background-color: var(--main-bg-color);
+  transition: 0.4s ease;
+}
+
+#container {
+  color: var(--main-color);
+  max-width: 700px;
+  min-width: 300px;
+  margin: auto;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#topDecoration {
+  position: absolute;
+  z-index: -10;
+}
+
+/* --- Top row --- */
+
+#topRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  align-items: center;
+}
+
+#appTitle {
+  margin: 0px;
+  color: var(--main-color);
+  font-family: "Gilroy-Bold", sans-serif;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--main-bg-color);
+  -webkit-transition: 0.2s;
+  transition: 0.4s;
+  border-radius: 34px;
+  border-color: var(--main-color);
+  border: 2px solid;
+}
+
+.slider:before {
+  position: absolute;
+  top: 1;
+  content: "\e954";
+  font-family: "COCO-Icons";
+  font-size: 23px;
+  height: 24px;
+  width: 24px;
+  left: 1px;
+  bottom: 1px;
+  background-color: var(--primary-50);
+  transition: 0.4s;
+  border-radius: 50%;
+  border: 2px solid;
+}
+
+input:checked + .slider:before {
+  content: "\e980";
+  font-family: "COCO-Icons";
+  top: 1;
+  font-size: 23px;
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* --- Welcome text and drawing --- */
+
+#welcomeContainer {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+#welcomeTextContainer {
+  display: flex;
+  flex-direction: column;
+  margin-left: 16px;
+}
+
+#welcomeTitle {
+  margin: 0px;
+  font-size: 16px;
+  font-family: "Gilroy-Bold", sans-serif;
+}
+
+#welcomeText {
+  margin: 0px;
+  font-size: 16px;
+  line-height: 24px;
+  font-family: "Gilroy-Regular", sans-serif;
+}
+
+/* --- Login Form --- */
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputStyle {
+  line-height: 24px;
+  font-family: "Gilroy-Regular", sans-serif;
+  font-size: 16px;
+  max-width: 700px;
+  min-width: 248px;
+  margin-left: 26px;
+  margin-right: 26px;
+  margin-top: 9px;
+  margin-bottom: 9px;
+  padding: 16px;
+  border-radius: 16px;
+  color: var(--main-color);
+  border-color: var(--main-color);
+  background-color: var(--main-bg-color);
+  border: 2px solid;
+  box-shadow: var(--main-bg-color) 6px 6px 0px -2px, var(--main-color) 6px 6px;
+}
+
+#actionContainer {
+  display: flex;
+  flex-direction: row;
+  padding: 16px 26px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#rememberme {
+  background-color: var(--main-bg-color);
+  -webkit-appearance: none;
+  background-color: var(--main-bg-color);
+  border: 2px solid var(--main-color);
+  padding: 9px;
+  border-radius: 4px;
+  margin-right: 7px;
+  display: inline-block;
+  position: relative;
+}
+
+#rememberme:checked {
+  background-color: var(--accent-60);
+  color: var(--main-color);
+}
+
+#rememberme:checked:after {
+  font-family: "COCO-Icons" !important;
+  font-size: 18px;
+  content: "\e983";
+  position: absolute;
+  top: 1px;
+  left: 0px;
+}
+
+#remembermeLabel {
+  line-height: 24px;
+  font-family: "Gilroy-Regular", sans-serif;
+  display: flex;
+  flex-grow: 0;
+  flex-direction: row;
+  align-items: center;
+}
+
+#loginButton {
+  line-height: 24px;
+  font-family: "Gilroy-Bold", sans-serif;
+  font-size: 16px;
+  color: var(--main-color);
+  background-color: var(--primary-50);
+  padding: 16px 32px;
+  border-color: var(--main-color);
+  border-radius: 16px;
+  border: 2px solid;
+  box-shadow: var(--accent-60) 6px 6px 0px -2px, var(--main-color) 6px 6px;
+}
+
+/* --- Register Card --- */
+
+#registerCard {
+  color: var(--main-color);
+  max-width: 700px;
+  min-width: 300px;
+  margin: 18px;
+  padding: 18px;
+  border-radius: 12px;
+  border: 2px solid;
+  background-color: var(--main-bg-color);
+  border-color: var(--main-color);
+  box-shadow: 6px 6px var(--main-color);
+}
+
+#registerTitle {
+  margin-top: 0px;
+  font-size: 16px;
+  font-family: "Gilroy-Bold", sans-serif;
+}
+
+#registerInfo {
+  margin: 0px;
+  font-size: 12px;
+  line-height: 24px;
+  font-family: "Gilroy-Regular", sans-serif;
+}
+
+#registerButton {
+  margin-top: 18px;
+  padding: 16px;
+  width: 100%;
+  border-radius: 16px;
+  border-color: var(--main-color);
+  border: 2px solid;
+  text-align: center;
+  font-size: 16px;
+  font-family: "Gilroy-Bold", sans-serif;
+  background: var(--primary-50);
+  color: var(--main-color);
+}
