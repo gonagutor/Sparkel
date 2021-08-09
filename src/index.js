@@ -9,6 +9,9 @@ import App from './pages/App';
 import Login from './pages/Login';
 import Register from './pages/Register';
 
+require('dotenv').config();
+require('./utils/API');
+
 ReactDOM.render(
   <React.StrictMode>
     <Router>

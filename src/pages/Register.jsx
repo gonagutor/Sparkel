@@ -2,6 +2,8 @@ import React from 'react';
 import '../styles/Login.css';
 import Theme from '../utils/theme';
 import TopDecoration from '../res/Login/top-decoration.svg';
+import MissingField from '../components/Register/MissingField';
+import API from '../utils/API';
 
 class Register extends React.Component {
   constructor(props) {
@@ -65,6 +67,12 @@ class Register extends React.Component {
     };
 
     this.onRegister = () => {
+      const {
+        email, password, username, name, surname,
+      } = this.state;
+      console.log(email);
+      console.log(password);
+      API.registerUser(email, password, username, name, surname).then((error) => alert(error));
       /* const { username, password, rememberMe } = this.state;
       console.log(`User: ${username}; Password: ${password}; Remember me: ${rememberMe}`); */
     };
@@ -95,13 +103,15 @@ class Register extends React.Component {
           <h1 style={{ color: 'var(--main-color)', fontSize: '36px', margin: '12px 26px' }}>Registrarse</h1>
           <div id="nameRow" style={{ display: 'flex' }}>
             <input className="inputStyle rowFirst" value={name} onChange={this.formFieldsHandlers.name} placeholder="Nombre" />
-            <input className="inputStyle rowSecond" value={surname} onChange={this.formFieldsHandlers.surname} type="password" placeholder="Apellidos" />
+            <input className="inputStyle rowSecond" value={surname} onChange={this.formFieldsHandlers.surname} placeholder="Apellidos" />
           </div>
-          <input className="inputStyle" value={username} onChange={this.formFieldsHandlers.username} placeholder="Email" />
-          <input className="inputStyle" value={email} onChange={this.formFieldsHandlers.email} type="password" placeholder="Contraseña" />
+          <input className="inputStyle" value={username} onChange={this.formFieldsHandlers.username} placeholder="Nombre de usuario" />
+          {(name.trim() === '') && <MissingField />}
+          <input className="inputStyle" value={email} onChange={this.formFieldsHandlers.email} placeholder="Email" />
           <input className="inputStyle" value={password} onChange={this.formFieldsHandlers.password} type="password" placeholder="Contraseña" />
           <input className={`inputStyle${badPasswordState}`} value={passwordCheck} onChange={this.formFieldsHandlers.passwordCheck} type="password" placeholder="Repite tu contraseña" />
           <input className="inputStyle" value={inviteCode} onChange={this.formFieldsHandlers.inviteCode} placeholder="Codigo de invitación" />
+          {(name.trim() === '') && <MissingField />}
           <input type="button" id="loginButton" value="Registrarse" onClick={this.onRegister} style={{ margin: '26px' }} />
         </form>
       </div>
