@@ -3,7 +3,6 @@ import '../styles/Login.css';
 import Theme from '../utils/theme';
 import TopDecoration from '../res/Login/top-decoration.svg';
 import MissingField from '../components/Register/MissingField';
-import API from '../utils/API';
 
 class Register extends React.Component {
   constructor(props) {
@@ -60,6 +59,7 @@ class Register extends React.Component {
         });
       },
       inviteCode: (e) => {
+        console.log('hola');
         this.setState({
           inviteCode: e.target.value,
         });
@@ -68,13 +68,69 @@ class Register extends React.Component {
 
     this.onRegister = () => {
       const {
-        email, password, username, name, surname,
+        inviteCode, email, password, passwordCheck,
       } = this.state;
-      console.log(email);
-      console.log(password);
-      API.registerUser(email, password, username, name, surname).then((error) => alert(error));
-      /* const { username, password, rememberMe } = this.state;
-      console.log(`User: ${username}; Password: ${password}; Remember me: ${rememberMe}`); */
+      let codigoInvitacionValido = false;
+      let emailValido = false;
+      let passwordValida = false;
+      const passwordChecks = [false, false, false, false, false];
+      let passwordCheckValida = false;
+      if (inviteCode.length === 6) {
+        codigoInvitacionValido = true;
+      }
+      for (let nLetra = 0; nLetra < email.length; nLetra += 1) {
+        if (email[nLetra] === '@') {
+          for (let i = nLetra; i < email.length; i += 1) {
+            if (email[i] === '.') {
+              emailValido = true;
+              break;
+            }
+          }
+        }
+      }
+      if (password.length >= 8) {
+        passwordChecks[0] = true;
+        const number = '0123456789';
+        for (let i = 0; i < number.length; i += 1) {
+          if (password.includes(number[i])) {
+            passwordChecks[1] = true;
+          }
+        }
+        const symbol = '+*{}[]?¿!¡-.,$#@()/\\&%';
+        for (let y = 0; y < password.length; y += 1) {
+          for (let z = 0; z < symbol.length; z += 1) {
+            if (password[y] === symbol[z]) {
+              passwordChecks[2] = true;
+            }
+          }
+        }
+        const minuscula = password.toLocaleLowerCase();
+        if (minuscula !== password) {
+          passwordChecks[3] = true;
+        }
+        const mayuscula = password.toLocaleUpperCase();
+        if (mayuscula !== password) {
+          passwordChecks[4] = true;
+        }
+        for (let i = 0; i <= passwordChecks.length; i += 1) {
+          if (passwordChecks[i] === true) {
+            passwordValida = true;
+          }
+        }
+      }
+      if (password === passwordCheck) {
+        passwordCheckValida = true;
+      }
+
+      if (emailValido === true
+        && codigoInvitacionValido === true
+        && passwordValida === true
+        && passwordCheckValida === true) {
+        alert('Te has registrado correctamete');
+      } else {
+        alert('Hay algún problema');
+      }
+      console.log(emailValido, codigoInvitacionValido, passwordValida, passwordCheckValida);
     };
   }
 
