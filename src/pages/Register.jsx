@@ -59,7 +59,6 @@ class Register extends React.Component {
         });
       },
       inviteCode: (e) => {
-        console.log('hola');
         this.setState({
           inviteCode: e.target.value,
         });
@@ -122,14 +121,7 @@ class Register extends React.Component {
         passwordCheckValida = true;
       }
 
-      if (emailValido === true
-        && codigoInvitacionValido === true
-        && passwordValida === true
-        && passwordCheckValida === true) {
-        alert('Te has registrado correctamete');
-      } else {
-        alert('Hay algún problema');
-      }
+      // eslint-disable-next-line no-console
       console.log(emailValido, codigoInvitacionValido, passwordValida, passwordCheckValida);
     };
   }
