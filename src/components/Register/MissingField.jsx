@@ -1,18 +1,26 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default function MissingField() {
+export default function MissingField({ text, clazz }) {
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-      paddingLeft: '26px',
-      paddingBottom: '8px',
-      color: 'red',
-    }}
+    <div
+      className={clazz}
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        paddingLeft: '26px',
+        color: 'red',
+        flexGrow: 1,
+      }}
     >
-      <i style={{ fontFamily: 'COCO-Icons', fontSize: '24px', paddingRight: '8px' }}></i>
+      <i style={{
+        fontFamily: 'COCO-Icons', fontSize: '24px', paddingRight: '8px', fontStyle: 'normal',
+      }}
+      >
+        
+      </i>
       <p style={{
         fontFamily: '"Gilroy-Regular", sans-serif',
         fontSize: '16px',
@@ -20,8 +28,17 @@ export default function MissingField() {
         margin: '0px',
       }}
       >
-        This field is required
+        {text}
       </p>
     </div>
   );
 }
+
+MissingField.propTypes = {
+  text: PropTypes.string.isRequired,
+  clazz: PropTypes.string,
+};
+
+MissingField.defaultProps = {
+  clazz: '',
+};

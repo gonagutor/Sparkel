@@ -9,6 +9,11 @@
   transition: 0.4s ease;
 }
 
+p {
+  font-family: "Gilroy-Regular", sans-serif;
+  font-weight: normal;
+}
+
 #container {
   color: var(--main-color);
   max-width: 700px;
@@ -280,4 +285,13 @@ form {
 #registerButton:focus {
   transition: background-color 0.5s ease;
   background-color: var(--primary-70);
+}
+
+#backButton {
+  border-radius: 16px;
+  width: 48px;
+  height: 48px;
+  background: var(--primary-50);
+  border: 2px solid;
+  border-color: var(--main-color);
 }
