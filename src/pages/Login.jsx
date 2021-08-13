@@ -1,11 +1,13 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import ReactRouterPropTypes from 'react-router-prop-types';
+import axios from 'axios';
 
 import '../styles/Login.css';
+import Popup from 'reactjs-popup';
 import Theme from '../utils/theme';
 import BlobsLockIcon from '../res/Login/blobs-lock-icon.svg';
-import TopDecoration from '../res/Login/top-decoration.svg';
+import TopDecoration from '../res/top-decoration.svg';
 
 class Login extends React.Component {
   constructor(props) {
@@ -14,13 +16,15 @@ class Login extends React.Component {
       username: '',
       password: '',
       rememberMe: false,
+      showModal: false,
+      modalData: '',
     };
 
-    this.toggleValue = sessionStorage.getItem('darkThemeOn') === 'true';
+    this.toggleValue = localStorage.getItem('darkThemeOn') === 'true';
     if (this.toggleValue) Theme.changeToTheme(Theme.black);
 
     this.changeCurrentTheme = (val) => {
-      sessionStorage.setItem('darkThemeOn', val);
+      localStorage.setItem('darkThemeOn', val);
       if (val === true) return Theme.changeToTheme(Theme.black);
       return Theme.changeToTheme(Theme.white);
     };
@@ -46,11 +50,29 @@ class Login extends React.Component {
     this.onLogin = () => {
       /* const { username, password, rememberMe } = this.state;
       console.log(`User: ${username}; Password: ${password}; Remember me: ${rememberMe}`); */
+      const { username, password } = this.state;
+      const { history } = this.props;
+      axios.post('https://sparkel-api.herokuapp.com/auth/login', {
+        username,
+        password,
+      }).then((val) => {
+        localStorage.setItem('token', val.data.token);
+        history.push('/');
+      }).catch((error) => {
+        if (error.response.status === 401) {
+          this.setState({ modalData: 'No has verificado tu correo. Por favor ve a tu correo y haz click en el enlace que recibiste.\nSi no has recibido ningún enlace compruba tu carpeta de spam y si sigues sin encontrarlo haz click aquí', showModal: true });
+        } else {
+          this.setState({ modalData: 'Tu usuario o contraseña no son correctos prueba otra vez', showModal: true });
+        }
+      });
     };
   }
 
   render() {
-    const { username, password, rememberMe } = this.state;
+    const {
+      username, password, rememberMe, showModal, modalData,
+    } = this.state;
+    const closeModal = () => this.setState({ showModal: false });
     const { history } = this.props;
     return (
       <div id="container">
@@ -90,6 +112,12 @@ class Login extends React.Component {
           </p>
           <button id="registerButton" type="button" onClick={() => history.push('/register')}> Registrarse </button>
         </div>
+        <Popup open={showModal} closeOnDocumentClick onClose={closeModal}>
+          <div className="modal">
+            {modalData}
+          </div>
+          <input type="button" className="close" onClick={closeModal} value="De acuerdo" />
+        </Popup>
       </div>
     );
   }

@@ -2,8 +2,10 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import '../styles/Login.css';
+import axios from 'axios';
+import Popup from 'reactjs-popup';
 import Theme from '../utils/theme';
-import TopDecoration from '../res/Login/top-decoration.svg';
+import TopDecoration from '../res/top-decoration.svg';
 import MissingField from '../components/Register/MissingField';
 import PasswordCheck from '../components/Register/PasswordCheck';
 
@@ -19,13 +21,15 @@ class Register extends React.Component {
       passwordCheck: '',
       inviteCode: '',
       showTooltips: [false, false, false, false, false, false],
+      modalOpen: false,
+      modalData: '',
     };
 
-    this.toggleValue = sessionStorage.getItem('darkThemeOn') === 'true';
+    this.toggleValue = localStorage.getItem('darkThemeOn') === 'true';
     if (this.toggleValue) Theme.changeToTheme(Theme.black);
 
     this.changeCurrentTheme = (val) => {
-      sessionStorage.setItem('darkThemeOn', val);
+      localStorage.setItem('darkThemeOn', val);
       if (val === true) return Theme.changeToTheme(Theme.black);
       return Theme.changeToTheme(Theme.white);
     };
@@ -100,6 +104,11 @@ class Register extends React.Component {
       },
       username: () => {
         const { username } = this.state;
+        for (let i = 0; i < username.length; i += 1) {
+          if (username[i] === ' ') {
+            return (true);
+          }
+        }
         return (username === '');
       },
       email: () => {
@@ -148,6 +157,7 @@ class Register extends React.Component {
 
     this.onRegister = () => {
       const { showTooltips } = this.state;
+      const { history } = this.props;
 
       showTooltips[0] = this.formFieldValidators.name();
       showTooltips[1] = this.formFieldValidators.surname();
@@ -159,9 +169,23 @@ class Register extends React.Component {
 
       this.setState({ showTooltips });
       if (showTooltips.every((val) => (val === false))) {
-        // TODO: Redirigir el usuario
-        // eslint-disable-next-line no-alert
-        alert('Todo correcto');
+        const {
+          username, password, email, name, surname, inviteCode,
+        } = this.state;
+        axios.post('https://sparkel-api.herokuapp.com/auth/register', {
+          username,
+          password,
+          email,
+          name,
+          surname,
+          inviteCode,
+        }).then(() => {
+          history.push('/login');
+        }).catch((error) => {
+          if (error.response.status === 401) {
+            this.setState({ modalData: 'Ese código de invitación no es válido o ha expirado', modalOpen: true });
+          } else { this.setState({ modalData: 'Ese nombre y/o correo ya existen', modalOpen: true }); }
+        });
       }
     };
   }
@@ -176,9 +200,12 @@ class Register extends React.Component {
       passwordCheck,
       inviteCode,
       showTooltips,
+      modalOpen,
+      modalData,
     } = this.state;
     const { history } = this.props;
     let nameAndSurnameTooltip = '';
+    const closeModal = () => this.setState({ modalOpen: false });
     if (showTooltips[0]) { nameAndSurnameTooltip = 'Tu nombre es necesario'; }
     if (showTooltips[1]) { nameAndSurnameTooltip = 'Tus apellidos son necesarios'; }
     if (showTooltips[0] && showTooltips[1]) { nameAndSurnameTooltip = 'Tu nombre y tus apellidos son necesarios'; }
@@ -216,6 +243,12 @@ class Register extends React.Component {
           {showTooltips[6] && <MissingField text="Debes introducir un codigo válido" />}
           <p style={{ paddingLeft: '36px', margin: '0px', color: 'gray' }}> (*) Todos los campos son necesarios</p>
           <input type="button" id="loginButton" value="Registrarse" onClick={this.onRegister} style={{ margin: '26px' }} />
+          <Popup open={modalOpen} closeOnDocumentClick onClose={closeModal}>
+            <div className="modal">
+              {modalData}
+            </div>
+            <input type="button" className="close" onClick={closeModal} value="De acuerdo" />
+          </Popup>
         </form>
       </div>
     );

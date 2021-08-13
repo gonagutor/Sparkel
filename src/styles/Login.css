@@ -295,3 +295,33 @@ form {
   border: 2px solid;
   border-color: var(--main-color);
 }
+
+.popup-overlay {
+  background-color: rgb(0 0 0 / 25%);
+  padding: 16px;
+}
+
+.popup-content {
+  box-shadow: var(--accent-60) 6px 6px 0px -2px, var(--main-color) 6px 6px;
+  font-family: "Gilroy-Regular", sans-serif;
+  font-weight: normal;
+  border: 2px solid;
+  background-color: var(--main-bg-color);
+  padding: 16px;
+  border-radius: 16px;
+}
+
+.close {
+  margin-top: 18px;
+  padding: 16px;
+  width: 100%;
+  border-radius: 16px;
+  border-color: var(--main-color);
+  border: 2px solid;
+  text-align: center;
+  font-size: 16px;
+  font-family: "Gilroy-Bold", sans-serif;
+  font-weight: normal;
+  background: var(--primary-50);
+  color: var(--main-color);
+}
